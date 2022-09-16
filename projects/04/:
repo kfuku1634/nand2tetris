@@ -11,21 +11,7 @@
 // "white" in every pixel;
 // the screen should remain fully clear as long as no key is pressed.
 
-
-@R0
-M = 0
 (LOOP)
-    @R0
-    D = M
-    @8192
-    D = D - A
-    @DEFAULT
-    D;JNE
-    @R0
-    M = 0
-    (DEFAULT)
-    @R0
-    M = M + 1
     @24576
     D = M
     @WHITE
@@ -34,18 +20,33 @@ M = 0
     D;JNE
     (WHITE)
     @R0
-    D = M
-    @SCREEN
-    A = D + A
     M = 0
+    @SCREEN
+        (WHITELOOP)
+        M = 0
+        @R0
+        M = M + 1
+        D = M
+        @8912
+        D = D - A
+        @WHITELOOP
+        D;JNE
+        (WHITELOOPEND)
     @LOOP
     0;JMP
-    (BLACK)
     @R0
-    D = M
+    M = 0
     @SCREEN
-    A = D + A
-    M = -1
+        (BLACKLOOP)
+        M = 0
+        @R0
+        M = M + 1
+        D = M
+        @8912
+        D = D - A
+        @BLACKLOOP
+        D;JNE
+        (BLACKLOOPEND)
     @LOOP
     0;JMP
 (END)
