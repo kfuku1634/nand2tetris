@@ -11,7 +11,7 @@ class Parser():
 
         self.current_idx = -1
         self.current_command = []
-    
+
     def hasMoreCommands(self) -> bool:
         Ncommands = len(self.fdata)
         if self.current_idx < (Ncommands - 1):
