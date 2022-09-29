@@ -31,6 +31,8 @@ class Parser():
     def commandType(self):
         if self.current_command_list[0] == "push":
             self.current_commandType = "C_PUSH"
+        elif self.current_command_list[0] == "pop":
+            self.current_commandType = "C_POP"
         else:
             self.current_commandType = "C_ARITHMETIC"
         return self.current_commandType

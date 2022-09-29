@@ -8,6 +8,7 @@ def main():
     with open(infile, mode='r') as f:
         parser = Parser(f)
     code_writer = CodeWriter()
+    code_writer.setFileName(infile)
 
     while parser.hasMoreCommands():
         parser.advance()
