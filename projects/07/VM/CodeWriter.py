@@ -124,11 +124,11 @@ class CodeWriter():
         self._decSP()
         self._setAddressSegmentPlusIndex(where)
         print("D=A")
-        print("@{}_ACCESS_AD".format(where))
+        print("@POP")
         print("M=D")
         self._setAddressFromSP()
         print("D=M")
-        print("@{}_ACCESS_AD".format(where))
+        print("@POP")
         print("A=M")
         print("M=D")
         
