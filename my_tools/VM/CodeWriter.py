@@ -226,3 +226,31 @@ class CodeWriter():
             else: 
                 pass
 
+    def writeInit(self):
+        print("@256")
+        print("D=A")
+        print("@SP")
+        print("M=D")
+
+    def writeLabel(self, label):
+        print("({})".format(label))
+
+    def writeGoto(self, label):
+        print("@{}".format(label))
+        print("0;JMP")
+
+    def writeIF(self, label):
+        self._decSP()
+        self._setAddressFromSP()
+        print("D=M")
+        print("@{}".format(label))
+        print("D;JNE")
+
+    def writeCall(self, functionName, numArgs):
+        pass
+
+    def writeReturn(self):
+        pass
+
+    def writeFunction(self, functionName, numLocals):
+        pass

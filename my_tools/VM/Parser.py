@@ -33,6 +33,18 @@ class Parser():
             self.current_commandType = "C_PUSH"
         elif self.current_command_list[0] == "pop":
             self.current_commandType = "C_POP"
+        elif self.current_command_list[0] == "label":
+            self.current_commandType = "C_LABEL"
+        elif self.current_command_list[0] == "goto":
+            self.current_commandType = "C_GOTO"
+        elif self.current_command_list[0] == "if-goto":
+            self.current_commandType = "C_IF"
+        elif self.current_command_list[0] == "function":
+            self.current_commandType = "C_FUNCTION"
+        elif self.current_command_list[0] == "return":
+            self.current_commandType = "C_RETURN"
+        elif self.current_command_list[0] == "call":
+            self.current_commandType = "C_CALL"
         else:
             self.current_commandType = "C_ARITHMETIC"
         return self.current_commandType
