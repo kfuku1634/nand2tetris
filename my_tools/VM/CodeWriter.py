@@ -116,8 +116,8 @@ class CodeWriter():
         print("@{}".format(index))
         print("D=A")
 
-    def _setAddressSegmentPlusIndex(self, ram_symbol):
-        print("@{}".format(ram_symbol))
+    def _setAddressSegmentPlusIndex(self, segment):
+        print("@{}".format(segment))
         print("A=D+M")
 
     def _popTo(self, where):
@@ -149,25 +149,25 @@ class CodeWriter():
         print("A=M")
         print("M=D")
 
-    def writePushPop(self, command, segment, index):
+    def _pushFrom(self, where, index):
         self._setIndexToDRegister(index)
+        self._setAddressSegmentPlusIndex(where)
+        print("D=M")
+        self._setAddressFromSP()
+        print("M=D")
+        self._incSP()
+
+    def writePushPop(self, command, segment, index):
         if command == "C_PUSH":
             if segment == "constant":
+                self._setIndexToDRegister(index)
                 self._setAddressFromSP()
                 print("M=D")
                 self._incSP()
             elif segment == "local":
-                self._setAddressSegmentPlusIndex("LCL")
-                print("D=M")
-                self._setAddressFromSP()
-                print("M=D")
-                self._incSP()
+                self._pushFrom("LCL", index)
             elif segment == "argument":
-                self._setAddressSegmentPlusIndex("ARG")
-                print("D=M")
-                self._setAddressFromSP()
-                print("M=D")
-                self._incSP()
+                self._pushFrom("ARG", index)
             elif segment == "this":
                 self._setAddressSegmentPlusIndex("THIS")
                 print("D=M")
@@ -227,10 +227,7 @@ class CodeWriter():
                 pass
 
     def writeInit(self):
-        print("@256")
-        print("D=A")
-        print("@SP")
-        print("M=D")
+        pass
 
     def writeLabel(self, label):
         print("({})".format(label))
@@ -249,8 +246,47 @@ class CodeWriter():
     def writeCall(self, functionName, numArgs):
         pass
 
+    def _setDataToAddressM(self, segment, data ):
+        print("@{}".format(segment))
+        print("M={}".format(data))
+
     def writeReturn(self):
-        pass
+        self._decSP()
+        self._setAddressFromSP()
+        print("D=M")
+        print("@ARG")
+        print("A=M")
+        print("M=D")
+        print("@ARG")
+        print("D=M")
+        print("@SP")
+        print("M=D")
+        self._incSP()
+        for n in reversed(range(5)):
+            print("@{}".format(n+1))
+            print("D=A")
+            print("@LCL")
+            print("A=M")
+            print("A=A-D")
+            print("D=M")
+            print("@SP")
+            print("A=M")
+            print("M=D")
+            self._incSP()
+        segment_order = ["THAT", "THIS", "ARG" , "LCL" ]
+        for segment in segment_order:
+            self._decSP()
+            self._setAddressFromSP()
+            print("D=M")
+            print("@{}".format(segment))
+            print("M=D")
+        self._decSP()
+        print("A=M")
+        print("0;JMP")
 
     def writeFunction(self, functionName, numLocals):
-        pass
+        print("({})".format(functionName))
+        for _ in range(int(numLocals)):
+            self._setAddressFromSP()
+            print("M=0")
+            self._incSP()

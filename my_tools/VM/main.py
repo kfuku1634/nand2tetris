@@ -29,7 +29,6 @@ def main():
             label = parser.arg1()
             code_writer.writeLabel(label)
         elif current_commandType == "C_RETURN":
-            label = parser.arg1()
             code_writer.writeReturn()
         elif current_commandType == "C_FUNCTION":
             functionName = parser.arg1()
