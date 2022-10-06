@@ -5,6 +5,7 @@ class CodeWriter():
         self.njmp = 0
         self.direct_map = { "TEMP":   "5",
                             "POINTER": "3"    }
+        self._Nret = 0
 
     def _setAddressFromSP(self):
         print("@SP")
@@ -169,18 +170,21 @@ class CodeWriter():
             elif segment == "argument":
                 self._pushFrom("ARG", index)
             elif segment == "this":
+                self._setIndexToDRegister(index)
                 self._setAddressSegmentPlusIndex("THIS")
                 print("D=M")
                 self._setAddressFromSP()
                 print("M=D")
                 self._incSP()
             elif segment == "that":
+                self._setIndexToDRegister(index)
                 self._setAddressSegmentPlusIndex("THAT")
                 print("D=M")
                 self._setAddressFromSP()
                 print("M=D")
                 self._incSP()
             elif segment == "temp":
+                self._setIndexToDRegister(index)
                 print("@{}".format(self.direct_map["TEMP"]))
                 print("A=D+A")
                 print("D=M")
@@ -188,6 +192,7 @@ class CodeWriter():
                 print("M=D")
                 self._incSP()
             elif segment == "pointer":
+                self._setIndexToDRegister(index)
                 print("@{}".format(self.direct_map["POINTER"]))
                 print("A=D+A")
                 print("D=M")
@@ -203,6 +208,7 @@ class CodeWriter():
             else: 
                 pass
         elif command == "C_POP":
+            self._setIndexToDRegister(index)
             if segment == "constant":
                 pass
             elif segment == "local":
@@ -244,7 +250,34 @@ class CodeWriter():
         print("D;JNE")
 
     def writeCall(self, functionName, numArgs):
-        pass
+        ret_address_symbol = "RET{}".format(self._Nret)
+        self._Nret += 1
+        print("@{}".format(ret_address_symbol))
+        print("D=A")
+        self._setAddressFromSP()
+        print("M=D")
+        self._incSP()
+        for segment in ["LCL", "ARG", "THIS", "THAT"]:
+            print("@{}".format(segment))
+            print("D=M")
+            self._setAddressFromSP()
+            print("M=D")
+            self._incSP()
+        print("@5")
+        print("D=A")
+        print("@SP")
+        print("D=M-D")
+        print("@{}".format(numArgs))
+        print("D=D-A")
+        print("@ARG")
+        print("M=D")
+        print("@SP")
+        print("D=M")
+        print("@LCL")
+        print("M=D")
+        print("@{}".format(functionName))
+        print("0;JMP")
+        print("({})".format(ret_address_symbol))
 
     def _setDataToAddressM(self, segment, data ):
         print("@{}".format(segment))
