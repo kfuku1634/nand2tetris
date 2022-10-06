@@ -233,7 +233,12 @@ class CodeWriter():
                 pass
 
     def writeInit(self):
-        pass
+        print("@256")
+        print("D=A")
+        print("@SP")
+        print("M=D")
+        self.writeCall("Sys.init", 0)
+
 
     def writeLabel(self, label):
         print("({})".format(label))
