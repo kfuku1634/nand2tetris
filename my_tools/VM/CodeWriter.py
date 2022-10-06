@@ -319,6 +319,7 @@ class CodeWriter():
             print("@{}".format(segment))
             print("M=D")
         self._decSP()
+        self._setAddressFromSP()
         print("A=M")
         print("0;JMP")
 
