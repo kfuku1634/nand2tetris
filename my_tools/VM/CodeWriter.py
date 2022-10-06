@@ -25,7 +25,7 @@ class CodeWriter():
         print("D=M")
 
     def setFileName(self, fileName):
-        self._fileSymbol = fileName.split(".")[0]
+        self._fileSymbol = fileName.split("/")[-1].split(".")[0]
         pass
 
     def writeArithmetric(self, command):
