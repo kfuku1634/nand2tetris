@@ -292,12 +292,12 @@ class CodeWriter():
         self._decSP()
         self._setAddressFromSP()
         print("D=M")
-        print("@ARG")
-        print("A=M")
+        print("@R14") #return-var
         print("M=D")
         print("@ARG")
         print("D=M")
         print("@SP")
+        print("A=M")
         print("M=D")
         self._incSP()
         for n in reversed(range(5)):
@@ -307,10 +307,14 @@ class CodeWriter():
             print("A=M")
             print("A=A-D")
             print("D=M")
-            print("@SP")
-            print("A=M")
-            print("M=D")
-            self._incSP()
+            if n == 4:
+                print("@R13") #return-address
+                print("M=D")
+            else:
+                print("@SP")
+                print("A=M")
+                print("M=D")
+                self._incSP()
         segment_order = ["THAT", "THIS", "ARG" , "LCL" ]
         for segment in segment_order:
             self._decSP()
@@ -320,6 +324,16 @@ class CodeWriter():
             print("M=D")
         self._decSP()
         self._setAddressFromSP()
+        print("D=M") #next_SP
+        print("@SP")
+        print("M=D")
+        print("@R14")
+        print("D=M")
+        print("@SP")
+        print("A=M")
+        print("M=D")
+        self._incSP()
+        print("@R13")
         print("A=M")
         print("0;JMP")
 
