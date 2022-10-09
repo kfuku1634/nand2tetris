@@ -19,7 +19,6 @@ class RunGame {
    }
 
    method void jumpMan() {
-      do Output.printString("hoge");
       do man.Jump();
       return;
    }
@@ -36,7 +35,9 @@ class RunGame {
       while (~exit) {
          if (key = 81)  { let exit = true; }   // q key
          if (key = 131) { do jumpMan(); }   // up arrow
-         let key = Keyboard.keyPressed();
+         if (~(key = 81)) {
+            let key = Keyboard.keyPressed();
+             }
       } // while
       return;
    }

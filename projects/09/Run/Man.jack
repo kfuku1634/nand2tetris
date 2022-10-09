@@ -1,11 +1,13 @@
 class Man {
    field int x, y; // screen location of the man's top-left corner 16*16.
    field int location;
+   field int x_min;
    field int memAddress;
 
    constructor Man new(int Ax, int Ay) {
       let x = Ax;
       let y = Ay;
+      let x_min = 100;
       do draw();
       return this;
    }
@@ -20,38 +22,56 @@ class Man {
    method void draw() {
       let location = x*32 + y;
 	  let memAddress = 16384+location;
-    do Memory.poke(memAddress+0, 2016);
-	do Memory.poke(memAddress+32, 2016);
-	do Memory.poke(memAddress+64, 2016);
-	do Memory.poke(memAddress+96, 2016);
-	do Memory.poke(memAddress+128, 384);
-	do Memory.poke(memAddress+160, 384);
-	do Memory.poke(memAddress+192, 2016);
-	do Memory.poke(memAddress+224, 3576);
-	do Memory.poke(memAddress+256, 14732);
-	do Memory.poke(memAddress+288, 390);
-	do Memory.poke(memAddress+320, 960);
-	do Memory.poke(memAddress+352, 1632);
-	do Memory.poke(memAddress+384, 2096);
-	do Memory.poke(memAddress+416, 4120);
-	do Memory.poke(memAddress+448, 24590);
-	do Memory.poke(memAddress+480, -16381);
+      do Memory.poke(memAddress+0, 2016);
+	  do Memory.poke(memAddress+32, 2016);
+	  do Memory.poke(memAddress+64, 2016);
+	  do Memory.poke(memAddress+96, 2016);
+	  do Memory.poke(memAddress+128, 384);
+	  do Memory.poke(memAddress+160, 384);
+	  do Memory.poke(memAddress+192, 2016);
+	  do Memory.poke(memAddress+224, 3576);
+	  do Memory.poke(memAddress+256, 14732);
+	  do Memory.poke(memAddress+288, 390);
+	  do Memory.poke(memAddress+320, 960);
+	  do Memory.poke(memAddress+352, 1632);
+	  do Memory.poke(memAddress+384, 2096);
+	  do Memory.poke(memAddress+416, 4120);
+	  do Memory.poke(memAddress+448, 24590);
+	  do Memory.poke(memAddress+480, -16381);
 	  return;
    }
 
-   /** Erases the man from the screen. */
+   /** Erases the man on the screen. */
    method void erase() {
-      do Screen.setColor(false);
-      return;
+      let location = x*32 + y;
+	  let memAddress = 16384+location;
+      do Memory.poke(memAddress+0,   0);
+	  do Memory.poke(memAddress+32,  0);
+	  do Memory.poke(memAddress+64,  0);
+	  do Memory.poke(memAddress+96,  0);
+	  do Memory.poke(memAddress+128, 0);
+	  do Memory.poke(memAddress+160, 0);
+	  do Memory.poke(memAddress+192, 0);
+	  do Memory.poke(memAddress+224, 0);
+	  do Memory.poke(memAddress+256, 0);
+	  do Memory.poke(memAddress+288, 0);
+	  do Memory.poke(memAddress+320, 0);
+	  do Memory.poke(memAddress+352, 0);
+	  do Memory.poke(memAddress+384, 0);
+	  do Memory.poke(memAddress+416, 0);
+	  do Memory.poke(memAddress+448, 0);
+	  do Memory.poke(memAddress+480, 0);
+	  return;
    }
 
    /** Jump the man. */
    method void Jump() {
-      if (y > 1) {
-         do Screen.setColor(false);
-         let y = y - 2;
-         do Screen.setColor(true);
-      }
+       do erase();
+       let x = x-1;
+       if ( x < x_min ) {
+               let  x = x_min;
+           }
+       do draw();
       return;
    }
 }

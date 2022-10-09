@@ -24,18 +24,6 @@ return
 function RunGame.jumpMan 0
 push argument 0
 pop pointer 0
-push constant 4
-call String.new 1
-push constant 104
-call String.appendChar 2
-push constant 111
-call String.appendChar 2
-push constant 103
-call String.appendChar 2
-push constant 101
-call String.appendChar 2
-call Output.printString 1
-pop temp 0
 push this 0
 call Man.Jump 1
 pop temp 0
@@ -82,8 +70,16 @@ push pointer 0
 call RunGame.jumpMan 1
 pop temp 0
 label IF_FALSE1
+push local 0
+push constant 81
+eq
+not
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 call Keyboard.keyPressed 0
 pop local 0
+label IF_FALSE2
 goto WHILE_EXP1
 label WHILE_END1
 push constant 0
