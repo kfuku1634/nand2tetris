@@ -1,15 +1,13 @@
 function RunGame.new 0
-push constant 3
+push constant 2
 call Memory.alloc 1
 pop pointer 0
-push this 1
-call Ground.new 1
-pop this 1
-push this 0
-call Man.new 1
+push constant 240
+push constant 30
+call Man.new 2
 pop this 0
 push constant 0
-pop this 2
+pop this 1
 push pointer 0
 return
 function RunGame.dispose 0
@@ -18,24 +16,29 @@ pop pointer 0
 push this 0
 call Man.dispose 1
 pop temp 0
-push this 1
-call Ground.dispose 1
-pop temp 0
 push pointer 0
 call Memory.deAlloc 1
 pop temp 0
 push constant 0
 return
-function RunGame.moveSquare 0
+function RunGame.jumpMan 0
 push argument 0
 pop pointer 0
-push this 2
-if-goto IF_TRUE0
-goto IF_FALSE0
-label IF_TRUE0
-call square.moveUp 0
+push constant 4
+call String.new 1
+push constant 104
+call String.appendChar 2
+push constant 111
+call String.appendChar 2
+push constant 103
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+call Output.printString 1
 pop temp 0
-label IF_FALSE0
+push this 0
+call Man.Jump 1
+pop temp 0
 push constant 0
 return
 function RunGame.run 2
@@ -75,24 +78,12 @@ eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
-push constant 0
-not
-pop this 2
+push pointer 0
+call RunGame.jumpMan 1
+pop temp 0
 label IF_FALSE1
-label WHILE_EXP2
-push local 0
-push constant 0
-eq
-not
-not
-if-goto WHILE_END2
 call Keyboard.keyPressed 0
 pop local 0
-push pointer 0
-call RunGame.moveSquare 1
-pop temp 0
-goto WHILE_EXP2
-label WHILE_END2
 goto WHILE_EXP1
 label WHILE_END1
 push constant 0

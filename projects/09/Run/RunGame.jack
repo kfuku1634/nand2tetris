@@ -1,11 +1,11 @@
 class RunGame {
    field Man man; 
-   field Ground ground;
+   //field Ground ground;
    field boolean jump;
 
    constructor RunGame new() {
-      let ground = ground.new();
-      let man = man.new();
+      //let ground = ground.new();
+      let man = Man.new(240,30);
       let jump = 0;
       return this;
    }
@@ -13,13 +13,14 @@ class RunGame {
    /** Disposes this game. */
    method void dispose() {
       do man.dispose();
-      do ground.dispose();
+      //do ground.dispose();
       do Memory.deAlloc(this);
       return;
    }
 
-   method void moveSquare() {
-      if (jump) { do square.moveUp(); }
+   method void jumpMan() {
+      do Output.printString("hoge");
+      do man.Jump();
       return;
    }
 
@@ -34,13 +35,8 @@ class RunGame {
 
       while (~exit) {
          if (key = 81)  { let exit = true; }   // q key
-         if (key = 131) { let jump = true; }   // up arrow
-
-         // waits for the key to be released
-         while (~(key = 0)) {
-            let key = Keyboard.keyPressed();
-            do moveSquare();
-         }
+         if (key = 131) { do jumpMan(); }   // up arrow
+         let key = Keyboard.keyPressed();
       } // while
       return;
    }
