@@ -29,6 +29,14 @@ call Man.Jump 1
 pop temp 0
 push constant 0
 return
+function RunGame.fallMan 0
+push argument 0
+pop pointer 0
+push this 0
+call Man.Fall 1
+pop temp 0
+push constant 0
+return
 function RunGame.run 2
 push argument 0
 pop pointer 0
@@ -69,7 +77,12 @@ label IF_TRUE1
 push pointer 0
 call RunGame.jumpMan 1
 pop temp 0
+goto IF_END1
 label IF_FALSE1
+push pointer 0
+call RunGame.fallMan 1
+pop temp 0
+label IF_END1
 push local 0
 push constant 81
 eq

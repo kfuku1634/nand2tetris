@@ -1,13 +1,14 @@
 class Man {
    field int x, y; // screen location of the man's top-left corner 16*16.
    field int location;
-   field int x_min;
+   field int x_min, x_max;
    field int memAddress;
 
    constructor Man new(int Ax, int Ay) {
       let x = Ax;
       let y = Ay;
       let x_min = 100;
+      let x_max = 240;
       do draw();
       return this;
    }
@@ -70,6 +71,17 @@ class Man {
        let x = x-1;
        if ( x < x_min ) {
                let  x = x_min;
+           }
+       do draw();
+      return;
+   }
+
+   /** Fall the man. */
+   method void Fall() {
+       do erase();
+       let x = x+1;
+       if ( x_max < x ) {
+               let  x = x_max;
            }
        do draw();
       return;

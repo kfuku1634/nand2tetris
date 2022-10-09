@@ -23,6 +23,11 @@ class RunGame {
       return;
    }
 
+   method void fallMan() {
+      do man.Fall();
+      return;
+   }
+
    method void run() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
@@ -34,7 +39,12 @@ class RunGame {
 
       while (~exit) {
          if (key = 81)  { let exit = true; }   // q key
-         if (key = 131) { do jumpMan(); }   // up arrow
+         if (key = 131) {    // up arrow
+             do jumpMan(); 
+             }
+         else {
+             do fallMan();
+            }
          if (~(key = 81)) {
             let key = Keyboard.keyPressed();
              }
