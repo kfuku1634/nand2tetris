@@ -4,11 +4,11 @@ class Man {
    field int x_min, x_max;
    field int memAddress;
 
-   constructor Man new(int Ax, int Ay) {
+   constructor Man new() {
       let x_min = 100;
       let x_max = 239;
       let x = x_max;
-      let y = Ay;
+      let y = 30;
       do draw();
       return this;
    }

@@ -5,7 +5,7 @@ class RunGame {
 
    constructor RunGame new() {
       //let ground = ground.new();
-      let man = Man.new(240,30);
+      let man = Man.new();
       let ground = Ground.new();
       let jump = 0;
       return this;

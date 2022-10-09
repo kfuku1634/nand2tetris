@@ -2,9 +2,7 @@ function RunGame.new 0
 push constant 3
 call Memory.alloc 1
 pop pointer 0
-push constant 240
-push constant 30
-call Man.new 2
+call Man.new 0
 pop this 0
 call Ground.new 0
 pop this 1
