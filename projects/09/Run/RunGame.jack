@@ -27,12 +27,12 @@ class RunGame {
       var boolean exit;
       let exit = false;
 
-      while (~(key = 131)) {
+      while ( ~(key = 131) ) {
          let key = Keyboard.keyPressed();
       }
 
       while (~exit) {
-         if (key = 81)  { let exit = true; }     // q key
+         if (key = 81)  { let exit = true; }   // q key
          if (key = 131) { let jump = true; }   // up arrow
 
          // waits for the key to be released
