@@ -1,11 +1,12 @@
 class RunGame {
    field Man man; 
-   //field Ground ground;
+   field Ground ground;
    field boolean jump;
 
    constructor RunGame new() {
       //let ground = ground.new();
       let man = Man.new(240,30);
+      let ground = Ground.new();
       let jump = 0;
       return this;
    }

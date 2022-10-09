@@ -1,0 +1,19 @@
+class Ground {
+   constructor Ground new() {
+      do draw_base();
+      return this;
+   }
+
+   /** Disposes this ground. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   /** Draws the man on the screen. */
+   method void draw_base() {
+       do Screen.setColor(true);
+       do Screen.drawLine(0, 255, 511, 255);
+	  return;
+   }
+}

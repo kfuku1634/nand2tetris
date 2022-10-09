@@ -5,10 +5,10 @@ class Man {
    field int memAddress;
 
    constructor Man new(int Ax, int Ay) {
-      let x = Ax;
-      let y = Ay;
       let x_min = 100;
-      let x_max = 240;
+      let x_max = 239;
+      let x = x_max;
+      let y = Ay;
       do draw();
       return this;
    }
