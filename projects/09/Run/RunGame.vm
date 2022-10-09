@@ -5,6 +5,9 @@ pop pointer 0
 push this 1
 call Ground.new 1
 pop this 1
+push this 0
+call Man.new 1
+pop this 0
 push constant 0
 pop this 2
 push pointer 0
