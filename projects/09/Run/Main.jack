@@ -1,8 +1,10 @@
-/** Run program. */
+/** Initializes a new Run game and starts running it. */
 class Main {
-   function void main() {
-      do Output.printString("Hello world!");
-      do Output.println();
-      return;
-   }
+    function void main() {
+        var RunGame game;
+        let game = RunGame.new();
+        do game.run();
+        do game.dispose();
+        return;
+    }
 }
