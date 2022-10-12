@@ -39,6 +39,7 @@ class RunGame {
       }
 
       while (~exit) {
+         do ground.move();
          if (key = 81)  { let exit = true; }   // q key
          if (key = 131) {    // up arrow
              do jumpMan(); 

@@ -1,0 +1,46 @@
+class Obstacle {
+   field int width, height;
+   field int x;
+
+   constructor Obstacle new() {
+      let height = 30;
+      let width = 20;
+      return this;
+   }
+
+   /** Disposes this obstacle. */
+   method void dispose() {
+      do Memory.deAlloc(this);
+      return;
+   }
+
+   method void draw(){
+      do Screen.setColor(true);
+      do Screen.drawRectangle(x, (254 - height), x+width, 254);
+      return;
+   }
+
+   method void erase(){
+      do Screen.setColor(false);
+      do Screen.drawRectangle(x, (254 - height), x+width, 254);
+      return;
+   }
+
+   method void move(){
+        do erase();
+        let x = x + 1;
+        do draw();
+        return;
+     }
+
+   method boolean is_right_term(){
+       if ( (x+width) = 510 ){ return true; }
+       else  { return false; }
+       }
+
+   method void set_default(){
+       do erase();
+       let x = 0;
+       return;
+       }
+}

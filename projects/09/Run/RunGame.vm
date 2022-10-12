@@ -58,6 +58,9 @@ push local 1
 not
 not
 if-goto WHILE_END1
+push this 1
+call Ground.move 1
+pop temp 0
 push local 0
 push constant 81
 eq

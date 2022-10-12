@@ -1,5 +1,23 @@
 class Ground {
+   field Array obstacle_arr;
+   field Array obstacle_occupied;
+   field int current_obstacle;
+   field int max_obstacle;
+
    constructor Ground new() {
+      var int i;
+      var int N_obstacle;
+      let N_obstacle = 5;
+      let obstacle_arr = Array.new(N_obstacle);
+      let obstacle_occupied = Array.new(N_obstacle);
+      let current_obstacle = 0;
+      let max_obstacle = 0;
+      let i=0;
+      while( i < 5 ){
+          let obstacle_arr[i] = Obstacle.new();
+          let obstacle_occupied[i] = false;
+          let i = i + 1;
+      }
       do draw_base();
       return this;
    }
@@ -10,10 +28,33 @@ class Ground {
       return;
    }
 
-   /** Draws the man on the screen. */
    method void draw_base() {
        do Screen.setColor(true);
        do Screen.drawLine(0, 255, 511, 255);
 	  return;
    }
+
+   method void move(){
+       var int i;
+       var Obstacle i_obstacle;
+       var boolean is_right;
+       let i=0;
+       while( i < 5 ){
+            if ( obstacle_occupied[i] = false ) {
+                let obstacle_occupied[i] = true;
+                return;
+            }
+            else {
+                let i_obstacle = obstacle_arr[i];
+                do i_obstacle.move();
+                let is_right = i_obstacle.is_right_term();
+                if( is_right ) {
+                        do i_obstacle.set_default();
+                        let obstacle_occupied[i] = false;
+                    }
+            }
+            let i = i+1;
+           }
+       return;
+    }
 }
