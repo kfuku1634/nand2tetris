@@ -1,5 +1,5 @@
 function Man.new 0
-push constant 6
+push constant 7
 call Memory.alloc 1
 pop pointer 0
 push constant 100
@@ -253,10 +253,6 @@ push pointer 0
 call Man.erase 1
 pop temp 0
 push this 0
-push constant 1
-sub
-pop this 0
-push this 0
 push this 3
 lt
 if-goto IF_TRUE0
@@ -264,7 +260,18 @@ goto IF_FALSE0
 label IF_TRUE0
 push this 3
 pop this 0
+push constant 0
+pop this 6
+goto IF_END0
 label IF_FALSE0
+push this 0
+push constant 1
+sub
+pop this 0
+push constant 0
+not
+pop this 6
+label IF_END0
 push pointer 0
 call Man.draw 1
 pop temp 0
@@ -289,8 +296,27 @@ label IF_TRUE0
 push this 4
 pop this 0
 label IF_FALSE0
+push constant 0
+pop this 6
 push pointer 0
 call Man.draw 1
 pop temp 0
+push constant 0
+return
+function Man.can_jump 0
+push argument 0
+pop pointer 0
+push this 0
+push this 4
+eq
+push this 6
+or
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push constant 0
+not
+return
+label IF_FALSE0
 push constant 0
 return

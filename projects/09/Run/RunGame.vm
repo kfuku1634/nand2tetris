@@ -77,9 +77,20 @@ eq
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
+push this 0
+call Man.can_jump 1
+if-goto IF_TRUE2
+goto IF_FALSE2
+label IF_TRUE2
 push pointer 0
 call RunGame.jumpMan 1
 pop temp 0
+goto IF_END2
+label IF_FALSE2
+push pointer 0
+call RunGame.fallMan 1
+pop temp 0
+label IF_END2
 goto IF_END1
 label IF_FALSE1
 push pointer 0
@@ -90,12 +101,12 @@ push local 0
 push constant 81
 eq
 not
-if-goto IF_TRUE2
-goto IF_FALSE2
-label IF_TRUE2
+if-goto IF_TRUE3
+goto IF_FALSE3
+label IF_TRUE3
 call Keyboard.keyPressed 0
 pop local 0
-label IF_FALSE2
+label IF_FALSE3
 goto WHILE_EXP1
 label WHILE_END1
 push constant 0

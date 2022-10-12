@@ -3,6 +3,7 @@ class Man {
    field int location;
    field int x_min, x_max;
    field int memAddress;
+   field boolean before_action_is_jump;
 
    constructor Man new() {
       let x_min = 100;
@@ -68,10 +69,14 @@ class Man {
    /** Jump the man. */
    method void Jump() {
        do erase();
-       let x = x-1;
        if ( x < x_min ) {
                let  x = x_min;
+               let before_action_is_jump = false;
            }
+       else{
+               let x = x-1;
+               let before_action_is_jump = true;
+               }
        do draw();
       return;
    }
@@ -81,9 +86,17 @@ class Man {
        do erase();
        let x = x+1;
        if ( x_max < x ) {
-               let  x = x_max;
+            let  x = x_max;
            }
+       let before_action_is_jump = false;
        do draw();
       return;
    }
+
+   method boolean can_jump(){
+       if ( ( x = x_max ) | ( before_action_is_jump ) ){
+               return true;
+           }
+        return false;
+       }
 }

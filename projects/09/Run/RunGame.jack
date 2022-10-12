@@ -42,7 +42,12 @@ class RunGame {
          do ground.move();
          if (key = 81)  { let exit = true; }   // q key
          if (key = 131) {    // up arrow
-             do jumpMan(); 
+             if ( man.can_jump() ){
+                   do jumpMan(); 
+                 }
+                 else {
+                   do fallMan(); 
+                     }
              }
          else {
              do fallMan();
