@@ -3,17 +3,17 @@ class Ground {
    field Array obstacle_occupied;
    field int current_obstacle;
    field int max_obstacle;
+   field int N_obstacle;
 
    constructor Ground new() {
       var int i;
-      var int N_obstacle;
-      let N_obstacle = 5;
+      let N_obstacle = 1;
       let obstacle_arr = Array.new(N_obstacle);
       let obstacle_occupied = Array.new(N_obstacle);
       let current_obstacle = 0;
       let max_obstacle = 0;
       let i=0;
-      while( i < 5 ){
+      while( i < N_obstacle ){
           let obstacle_arr[i] = Obstacle.new();
           let obstacle_occupied[i] = false;
           let i = i + 1;
@@ -39,7 +39,7 @@ class Ground {
        var Obstacle i_obstacle;
        var boolean is_right;
        let i=0;
-       while( i < 5 ){
+       while( i < N_obstacle ){
             if ( obstacle_occupied[i] = false ) {
                 let obstacle_occupied[i] = true;
                 return;
