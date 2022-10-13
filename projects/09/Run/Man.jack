@@ -4,12 +4,14 @@ class Man {
    field int x_min, x_max;
    field int memAddress;
    field boolean before_action_is_jump;
+   field int y1;
 
    constructor Man new() {
       let x_min = 100;
       let x_max = 239;
       let x = x_max;
-      let y = 30;
+      let y1 = 480;
+      let y = y1/16;
       do draw();
       return this;
    }
@@ -98,5 +100,12 @@ class Man {
                return true;
            }
         return false;
+       }
+
+   method int get_foot_pos(){
+       return x;
+       }
+   method int get_ground_pos(){
+       return y1;
        }
 }

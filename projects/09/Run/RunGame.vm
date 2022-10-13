@@ -37,6 +37,20 @@ call Man.Fall 1
 pop temp 0
 push constant 0
 return
+function RunGame.man_is_crash 2
+push argument 0
+pop pointer 0
+push this 0
+call Man.get_foot_pos 1
+pop local 0
+push this 0
+call Man.get_ground_pos 1
+pop local 1
+push this 1
+push local 0
+push local 1
+call Ground.has_crash 3
+return
 function RunGame.run 2
 push argument 0
 pop pointer 0
@@ -107,6 +121,41 @@ label IF_TRUE3
 call Keyboard.keyPressed 0
 pop local 0
 label IF_FALSE3
+push pointer 0
+call RunGame.man_is_crash 1
+if-goto IF_TRUE4
+goto IF_FALSE4
+label IF_TRUE4
+push constant 0
+not
+pop local 1
+push constant 5
+push constant 20
+call Output.moveCursor 2
+pop temp 0
+push constant 9
+call String.new 1
+push constant 71
+call String.appendChar 2
+push constant 97
+call String.appendChar 2
+push constant 109
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 32
+call String.appendChar 2
+push constant 79
+call String.appendChar 2
+push constant 118
+call String.appendChar 2
+push constant 101
+call String.appendChar 2
+push constant 114
+call String.appendChar 2
+call Output.printString 1
+pop temp 0
+label IF_FALSE4
 goto WHILE_EXP1
 label WHILE_END1
 push constant 0

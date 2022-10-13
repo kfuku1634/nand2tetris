@@ -72,6 +72,36 @@ call Screen.drawLine 4
 pop temp 0
 push constant 0
 return
+function Ground.has_crash 4
+push argument 0
+pop pointer 0
+push constant 0
+pop local 3
+label WHILE_EXP0
+push local 3
+push this 4
+lt
+not
+if-goto WHILE_END0
+push local 3
+push this 0
+add
+pop pointer 1
+push that 0
+pop local 1
+push local 1
+push argument 1
+push argument 2
+call Obstacle.is_crash 3
+pop local 2
+push local 3
+push constant 1
+add
+pop local 3
+goto WHILE_EXP0
+label WHILE_END0
+push local 2
+return
 function Ground.move 3
 push argument 0
 pop pointer 0

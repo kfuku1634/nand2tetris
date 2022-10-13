@@ -29,6 +29,13 @@ class RunGame {
       return;
    }
 
+   method boolean man_is_crash(){
+       var int man_foot,man_ground_pos;
+       let man_foot = man.get_foot_pos();
+       let man_ground_pos = man.get_ground_pos();
+       return ground.has_crash( man_foot, man_ground_pos );
+       }
+
    method void run() {
       var char key;  // the key currently pressed by the user
       var boolean exit;
@@ -54,6 +61,11 @@ class RunGame {
             }
          if (~(key = 81)) {
             let key = Keyboard.keyPressed();
+             }
+         if ( man_is_crash() ) {
+                 let exit = true;
+                 do Output.moveCursor(5,20);
+                 do Output.printString( "Game Over" );
              }
       } // while
       return;

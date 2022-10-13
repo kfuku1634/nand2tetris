@@ -1,5 +1,5 @@
 function Man.new 0
-push constant 7
+push constant 8
 call Memory.alloc 1
 pop pointer 0
 push constant 100
@@ -8,7 +8,11 @@ push constant 239
 pop this 4
 push this 4
 pop this 0
-push constant 30
+push constant 480
+pop this 7
+push this 7
+push constant 16
+call Math.divide 2
 pop this 1
 push pointer 0
 call Man.draw 1
@@ -319,4 +323,14 @@ not
 return
 label IF_FALSE0
 push constant 0
+return
+function Man.get_foot_pos 0
+push argument 0
+pop pointer 0
+push this 0
+return
+function Man.get_ground_pos 0
+push argument 0
+pop pointer 0
+push this 7
 return

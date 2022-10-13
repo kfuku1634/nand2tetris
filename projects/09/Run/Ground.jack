@@ -34,6 +34,20 @@ class Ground {
 	  return;
    }
 
+   method boolean has_crash( int man_foot, int man_ground_pos ){
+       var int obstacle_pos;
+       var Obstacle i_obstacle;
+       var boolean has_crash;
+       var int i;
+       let i=0;
+       while( i < N_obstacle ){
+            let i_obstacle = obstacle_arr[i];
+            let has_crash = i_obstacle.is_crash(man_foot, man_ground_pos);
+            let i = i+1;
+           }
+       return has_crash;
+       }
+
    method void move(){
        var int i;
        var Obstacle i_obstacle;

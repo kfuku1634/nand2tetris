@@ -24,9 +24,8 @@ not
 call Screen.setColor 1
 pop temp 0
 push this 2
-push constant 254
-push this 1
-sub
+push pointer 0
+call Obstacle.get_top 1
 push this 2
 push this 0
 add
@@ -42,9 +41,8 @@ push constant 0
 call Screen.setColor 1
 pop temp 0
 push this 2
-push constant 254
-push this 1
-sub
+push pointer 0
+call Obstacle.get_top 1
 push this 2
 push this 0
 add
@@ -95,5 +93,41 @@ call Obstacle.erase 1
 pop temp 0
 push constant 0
 pop this 2
+push constant 0
+return
+function Obstacle.get_top 0
+push argument 0
+pop pointer 0
+push constant 254
+push this 1
+sub
+return
+function Obstacle.is_crash 1
+push argument 0
+pop pointer 0
+push pointer 0
+call Obstacle.get_top 1
+push argument 1
+lt
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 2
+push argument 2
+lt
+push argument 2
+push this 2
+push this 0
+add
+lt
+and
+if-goto IF_TRUE1
+goto IF_FALSE1
+label IF_TRUE1
+push constant 0
+not
+return
+label IF_FALSE1
+label IF_FALSE0
 push constant 0
 return
